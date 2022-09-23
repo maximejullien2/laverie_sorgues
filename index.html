@@ -1,0 +1,228 @@
+<html>
+    <!-- Ceci représentera le nom du site , le rwd et les liens pour faire javascript,w3.css etc....-->
+    <head>
+        <title>Laverie sorgues</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+            integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+            crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <!--Il va représenter le corp de mon site web-->
+    <body>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <style>
+            #map{
+                height: 100%;
+                width: 100%;
+            }
+
+            @media screen and (min-width: 601px) {
+                h2.image {
+                    font-size: 30px;
+                }
+            }
+
+                /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+            @media screen and (max-width: 600px) {
+                h2.image {
+                    font-size: 15px;
+                }
+            }
+            #animation{
+                animation-name: clignotez;
+                animation-duration: 2s ;
+                animation-iteration-count: infinite;
+            }
+            @keyframes clignotez{
+                0% {color: black;}
+                50% {color: white;}
+                100% {color: black;}
+            }
+        </style>
+
+
+        <div class="w3-top w3-red" style="z-index: 10;">
+            <div class="w3-bar w3-card">
+                <a href="#nb_machine" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-hide-medium">Machines/Capacités/Prix</a>
+                <a href="https://status.wi-line.fr/?id=007608c789d717690fb9df7d7ec97100" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-hide-medium">Disponibilité des machines : <span id="animation">Cliquez Ici </span></a>
+                <a class="w3-bar-item w3-button w3-padding-large w3-hide-large w3-right" style="height:46.5px ;" id="afficher" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            </div>
+            <div id="navDemo" class="w3-bar-block  w3-hide">
+                <a href="#nb_machine" class="w3-bar-item w3-button w3-padding-large">Machines/Capacités/Prix</a>
+                <a href="https://status.wi-line.fr/?id=007608c789d717690fb9df7d7ec97100" target="_blank" class="w3-bar-item w3-button w3-padding-large">Disponibilité des machines : <span id="animation">Cliquez Ici </span></a>
+            </div>
+
+        </div>
+        <br><br>
+
+        <div class=" w3-container w3-center">
+            <p id="animation" style="font-size: 30px;"><b>Laverie Place de la Mairie</b></p>
+            <p id="animation" style="font-size: 30px;"><b>99 Avenue du 11 Novembre - 84700 SORGUES</b></p>
+        </div>
+
+        <div class="w3-center  w3-text-white" style="position: relative ;">
+            <img src="./image_laverie/20220910_171937.jpg" id="img1" class="Affichage1" style="display: inline-block; width: 100%;">
+            <img src="./image_laverie/20220923_081806.jpg" id="img2" class="Affichage1" style="display: none; width: 100%;">
+            <img src="./image_laverie/20220923_081822.jpg" id="img3" class="Affichage1" style="display: none; width: 100%;">
+            <div style="position: absolute ;top:50%;left:50%;transform: translate(-50%, -50%);">
+                <h2 class="image" ><b>Ouvert de 7H à 22H 7j/7 <b></b></h2>
+                <a class="w3-button w3-red"  href="https://www.google.fr/maps/dir//Laverie+Place+de+la+Mairie+-+Sorgues,+99+Av.+du+11+Novembre,+84700+Sorgues/@44.0081958,4.871631,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x12b592bf6c3e9e3d:0x8a7f303b563c7f0f!2m2!1d4.873825!2d44.008192">NOUS TROUVER</a>
+            </div>
+        </div>
+
+        <div class="w3-container  w3-border w3-border-black" >
+            <p class="w3-center" style="font-size: 30px;">Mode de paiement :</p>
+            <table style="width:100% ;" class="w3-hide-small">
+                <tr>
+                    <th style="width: 60%;">
+                        <p>Il y a 2 modes de paiements . Le premier avec pièces ou billets . Le second étant le paiement sans contact CB.</p>
+                        <p><i class="fa fa-exclamation-triangle" style="font-size:48px;color:red"></i> Les pièces de  1,2,5 centimes et les billets de 50,100,200,500 € ne sont pas pris en compte par la centrale de paiement.</p>
+                    </th>
+                    <th >
+                        <img src="./sticker-logo-paiement-sans-contact.jpg" >
+                    </th>
+                </tr>
+            </table>
+           <div class="w3-container w3-hide-large w3-hide-medium" style="display: inline-block; ">
+                <p>Il y a 2 modes de paiements . Le premier avec pièces ou billets . Le second étant le paiement sans contact CB.</p>
+                <p><i class="fa fa-exclamation-triangle" style="font-size:48px;color:red"></i> Les pièces de  1,2,5 centimes et les billets de 50,100,200,500 € ne sont pas pris en compte par la centrale de paiement.</p>
+            </div>
+            <div class="w3-container w3-hide-large w3-hide-medium" style="display: inline-block; ">
+                <img src="./sticker-logo-paiement-sans-contact.jpg" style="width:100%;">
+            </div> 
+        </div>
+        <div class="w3-container  w3-border w3-border-black w3-center">
+                <div style="font-size: 30px;">
+                    <p>Site sous vidéo-surveillance déclaré en Préfecture</p>
+                    <img src="./panneau-d-information-attention-site-sous-video-surveillance-avec-decret.jpg" style="height:20% ;">
+                </div>
+        </div>
+
+        <div class="w3-container w3-center w3-border w3-border-black" id="nb_machine" >
+            <p class="w3-center" style="font-size: 30px;">Nombre de Machines et leurs Capacités</p>
+            <div class="w3-container w3-center" style="display: inline-block; ">
+                <div class="w3-grey w3-panel w3-border w3-round-xlarge w3-border-black">
+                    <img src="./image_machine/machine_7kg_11.jpg"  style="height: 25%;">
+                    <p >Capacité des machine : 7kg</p>
+                    <p>Numéro des machines : n°11,19 </p>
+                    <p >Prix : 4.50 €</p>
+                </div>
+            </div>
+            <div class="w3-container w3-center" style="display: inline-block; ">
+                <div class="w3-grey w3-panel w3-border w3-round-xlarge w3-border-black">
+                    <img src="./image_machine/machine_10kg_12.jpg" style="height: 25%;">
+                    <p>Capacité de la machine : 10kg</p>
+                    <p>Numéro de la machine : n°12</p>
+                    <p>Prix : 5.50 €</p>
+                </div>
+            </div>
+            <div class="w3-container w3-center" style="display: inline-block; ">
+                <div class="w3-grey w3-panel w3-border w3-round-xlarge w3-border-black">
+                    <img src="./image_machine/machine_14kg_13.jpg" class="Affichages2" style="height: 25%;">
+                    <img src="./image_machine/machine_14kg_15.jpg" class="Affichages2" style="height: 25%;">
+                    <p>Capacité des machine : 14kg</p>
+                    <p>Numéro des machine : n°13,15</p>
+                    <p>Prix : 7.50 €</p>
+                </div>
+            </div>
+            <div class="w3-container w3-center" style="display: inline-block; ">
+                <div class="w3-grey w3-panel w3-border w3-round-xlarge w3-border-black">
+                    <img src="./image_machine/machine_18kg_16.jpg" class="Affichages3" style="height: 25%;">
+                    <img src="./image_machine/machine_18kg_17.jpg" class="Affichages3" style="height: 25%;">
+                    <p>Capacité des machine : 18kg</p>
+                    <p>Numéro des machine : n°16,17</p>
+                    <p>Prix : 9.00 €</p>
+                </div>
+            </div>
+            <div class="w3-container w3-center" style="display: inline-block; ">
+                <div class="w3-grey w3-panel w3-border w3-round-xlarge w3-border-black">
+                    <img src="./image_machine/sechoir.jpg" style="height: 25%;">
+                    <p>Capacité des séchoir : 15kg</p>
+                    <p>Numéro des machines : n°20,21,22</p>
+                    <p>Prix : 1.20 € pour 10 minutes</p>
+                </div>
+            </div>
+            <div class="w3-container w3-center" style="display: inline-block; ">
+                <div class="w3-grey w3-panel w3-border w3-round-xlarge w3-border-black">
+                    <img src="./image_machine/lessive_assouplissant.jpg" style="height: 25%;">
+                    <p>Numéro pour de la lessive : n°20 </p>
+                    <p>Prix de la lessive: 1.00€ pour 1 dose de 2 pastilles</p>
+                    <p>Numéro de l'assouplissant : n°25</p>
+                    <p>Prix de l'assouplissant : 0.70€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container w3-center" id="disponibilite" style="padding-bottom: 25px;">
+            <p style="font-size: 30px;">Pour pouvoir voir les machines qui sont disponibles à cette heure-ci . Veuillez cliquer sur l'image ci-dessous</p>
+            <a href="https://status.wi-line.fr/?id=007608c789d717690fb9df7d7ec97100" target="_blank" class="w3-hide-small w3-hide-medium"><img src="./image_laverie/wi_line.jpg" style="height: 40%;"></a>
+            <a href="https://status.wi-line.fr/?id=007608c789d717690fb9df7d7ec97100" target="_blank" class="w3-hide-large"><img src="./image_laverie/wi_line.jpg" style="height: 30%;"></a>
+        </div>
+
+        <div class=" w3-container w3-border w3-border-black" >
+            <h3 class="w3-center" style="font-size: 30px;">Emplacement de la Laverie</h3>
+            <table style="width:100%;height:50% ;" >
+                <tr>
+                    <th style="width: 50%; height:100%">
+                        <div id="map" style="z-index: 0 " ></div>
+                    </th>
+                    <th style="width: 50%; height:50%" class="w3-hide-small w3-hide-medium w3-center" >
+                        <p >Si vous voulez voir le trajet depuis votre téléphone vers la laverie . <br> Activez votre GPS puis cliquez sur le bouton suivant : </p>
+                        <button onclick="getLocation()" >Cliquez Ici</button>
+                        <br>
+                        <p class="w3-hide" id="caché" >La distance à faire est de <b id="distance"></b></p>
+                        <p class="w3-hide" id="caché" >Le temps pour faire cette distance est de <b id="heure"></b></p>
+                    </th>
+                </tr>
+            </table>
+            <div class="w3-hide-large w3-center" style="font-weight: bold;">
+                <p >Si vous voulez voir le trajet depuis votre téléphone vers la laverie . <br> Activez votre GPS puis cliquez sur le bouton suivant : </p>
+                <button onclick="getLocation()" >Cliquez Ici</button>
+                <br>
+                <p class="w3-hide" id="caché" >La distance à faire est de <b id="distance2"></b></p>
+                <p class="w3-hide" id="caché" >Le temps pour faire cette distance est de <b id="heure2"></b></p>
+            </div>
+        </div>
+
+        <div class="w3-container w3-black " >
+            <table style="width:100%" class="w3-hide-small w3-hide-medium">
+                <tr>
+                    <th class="w3-center" style="width: 50%;">
+                        <div  style="display: inline-block; " >
+                            <p style="display: inline-block;color: white; " >Lien réseaux sociaux :</p>
+                            <a href="https://www.facebook.com/people/Laverie-de-la-mairie-sorgues/100054646500763/" target="_blank" style="display: inline-block; "><i class="fa fa-facebook-square" style="font-size:36px ;color: white;"></i></a>
+                        </div>
+                    </th>
+                    <th class="w3-center" style="width: 50%;">
+                        <div style="display: inline-block; ">
+                            <p style="color: white; ">Adresse mail de contact : <a href="mailto:laverie.sorguaise@gmail.com">laverie.sorguaise@gmail.com</a></p>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+            <div class="w3-hide-large" style="font-weight: bold;" >
+                <p style="display: inline-block;color: white; " >Lien réseaux sociaux :</p>
+                <a href="https://www.facebook.com/people/Laverie-de-la-mairie-sorgues/100054646500763/" target="_blank" style="display: inline-block; "><i class="fa fa-facebook-square" style="font-size:36px;color: white;"></i></a>
+                <p style="color: white; ">Adresse mail de contact : <a href="mailto:laverie.sorguaise@gmail.com">laverie.sorguaise@gmail.com</a></p>
+            </div> 
+        </div>
+
+    </body>
+    
+    
+    <!--Sa serait par rapport au lien vers le facebook et les mentions légales-->
+    <footer class="w3-container w3-pannel w3-grey w3-border w3-center">
+        <p><a href="./mention_légale.html">Mention légales 2022</a></p>
+    </footer>
+    <script src="./javascript.js"></script>
+
+</html>
