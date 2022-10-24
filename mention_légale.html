@@ -3,6 +3,33 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body>
+        <style>
+            #animation{
+                animation-name: clignotez;
+                animation-duration: 2s ;
+                animation-iteration-count: infinite;
+            }
+            @keyframes clignotez{
+                0% {color: black;}
+                50% {color: white;}
+                100% {color: black;}
+            }
+
+        </style>
+        <div class="w3-top w3-red">
+            <div class="w3-bar w3-card">
+                <a href="./index.html#nb_machine" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-hide-medium">Machines/Capacités/Prix</a>
+                <a href="https://status.wi-line.fr/?id=007608c789d717690fb9df7d7ec97100" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-hide-medium">Disponibilité des machines : <span id="animation">Cliquez Ici </span></a>
+                <a class="w3-bar-item w3-button w3-padding-large w3-hide-large w3-right" style="height:46.5px ;" id="afficher" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            </div>
+            <div id="navDemo" class="w3-bar-block  w3-hide">
+                <a href="#nb_machine" class="w3-bar-item w3-button w3-padding-large">Machines/Capacités/Prix</a>
+                <a href="https://status.wi-line.fr/?id=007608c789d717690fb9df7d7ec97100" target="_blank" class="w3-bar-item w3-button w3-padding-large">Disponibilité des machines : <span id="animation">Cliquez Ici </span></a>
+            </div>
+
+        </div>
+        <br>
+<br>
         <div class="w3-container w3-panel w3-border w3-round-xlarge w3-border-black">
             <h1>Mentions Legales</h1>
             <p>Raison Sociale : LAV PRO</p>
